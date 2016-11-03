@@ -27,14 +27,14 @@ public class ItemDetailActivity extends Activity {
 	private void disableShutterSound(Camera camera, int cameraId) {
 
 		try {
-			Field idField = null;
+			Field canDisableField = null;
 			Camera.CameraInfo info = new Camera.CameraInfo();
 			Camera.getCameraInfo(cameraId, info);
 
 			if (hasField(Camera.CameraInfo.class, "canDisableShutterSound")) {
-				idField = Camera.CameraInfo.class.getDeclaredField("canDisableShutterSound");
-				idField.setAccessible(true);
-				Boolean canDisableShutterSound = (Boolean) idField.get(info);
+				canDisableField = Camera.CameraInfo.class.getDeclaredField("canDisableShutterSound");
+				canDisableField.setAccessible(true);
+				Boolean canDisableShutterSound = (Boolean) canDisableField.get(info);
 
 				if (canDisableShutterSound) {
 					Method method = Camera.class.getMethod("enableShutterSound", boolean.class);
